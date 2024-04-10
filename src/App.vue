@@ -1,7 +1,11 @@
-<script setup></script>
+<script setup>
+import ClientForm from "./components/ClientForm.vue";
+</script>
 
 <template>
-  <div id="app">Hello world</div>
+  <div id="app">
+    <div class="wrapper">
+      <ClientForm />
+    </div>
+  </div>
 </template>
-
-<style scoped></style>
