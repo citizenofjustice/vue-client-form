@@ -1,0 +1,43 @@
+{
+  "initialMainValues": {
+    "firstName": "Orson",
+    "lastName": "Favelov",
+    "surname": "Sonnte",
+    "birthDate": "2024-04-11",
+    "phone": "89373754070",
+    "gender": "",
+    "groupRelation": [],
+    "workingTherapist": "",
+    "contactBySms": false
+  },
+  "initialAddressValues": {
+    "index": 123456,
+    "country": "",
+    "region": "",
+    "city": "",
+    "street": "",
+    "house": ""
+  },
+  "initialDocumentValues": {
+    "documentType": "",
+    "serial": "18 53",
+    "number": 199851,
+    "issuedBy": "МВД по Республике Чувашия",
+    "issueDate": "2016-08-01"
+  },
+  "clientGroupList": [
+    { "text": "VIP", "value": "VIP" },
+    { "text": "Проблемные", "value": "Проблемные" },
+    { "text": "ОМС", "value": "ОМС" }
+  ],
+  "therapistsList": [
+    { "text": "Иванов", "value": "Иванов" },
+    { "text": "Захаров", "value": "Захаров" },
+    { "text": "Чернышева", "value": "Чернышева" }
+  ],
+  "documentTypeList": [
+    { "text": "Паспорт", "value": "Паспорт" },
+    { "text": "Свидетельство о рождении", "value": "Свидетельство о рождении" },
+    { "text": "Вод. удостоверение", "value": "Вод. удостоверение" }
+  ]
+}
