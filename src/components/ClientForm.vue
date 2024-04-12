@@ -3,23 +3,22 @@ import { ref } from "vue";
 import { useVuelidate } from "@vuelidate/core";
 import { required, numeric, minLength, maxLength } from "@vuelidate/validators";
 import { startsWithSeven } from "../utils/vuelidate-helpers";
-import {
-  initialMainValues,
-  clientGroupList,
-  therapistsList,
-} from "../data/clientInputs.json";
+import { initialMainValues, therapistsList } from "../data/clientInputs.json";
 import { store } from "../store/store.js";
+import MultiSelect from "./MultiSelect.vue";
 
 const inputs = initialMainValues;
-const groups = ref(clientGroupList);
 const therapists = ref(therapistsList);
 
 export default {
+  components: {
+    MultiSelect,
+  },
   setup() {
     return { v$: useVuelidate() };
   },
   data() {
-    return { inputs, groups, therapists };
+    return { inputs, therapists };
   },
   validations() {
     return {
@@ -38,6 +37,7 @@ export default {
       },
     };
   },
+  computed: {},
   methods: {
     async sendForm() {
       const isFormCorrect = await this.v$.$validate();
@@ -53,54 +53,51 @@ export default {
   <section class="form-wrapper">
     <form class="client" @submit.prevent="sendForm">
       <div class="form-item">
-        Фамилия:
+        <label>Фамилия:</label>
         <input type="text" v-model="inputs.lastName" class="text-input" />
       </div>
       <div class="form-item">
-        Имя: <input type="text" v-model="inputs.firstName" class="text-input" />
+        <label>Имя:</label>
+        <input type="text" v-model="inputs.firstName" class="text-input" />
       </div>
       <div class="form-item">
-        Отчество:
+        <label>Отчество:</label>
         <input type="text" v-model="inputs.surname" class="text-input" />
       </div>
       <div class="form-item">
-        Дата рождения:
-        <input type="date" class="text-input" v-model="inputs.birthDate" />
+        <label>Дата рождения:</label>
+        <input type="date" class="date-input" v-model="inputs.birthDate" />
       </div>
       <div class="form-item">
-        Номер телефона:
+        <label>Номер телефона:</label>
         <input type="text" class="text-input" v-model="inputs.phone" />
       </div>
       <div class="form-item">
-        Пол:
-        <div>
-          <input type="radio" id="male" value="male" v-model="inputs.gender" />
-          <label for="male">муж.</label>
-
-          <input
-            type="radio"
-            id="female"
-            value="female"
-            v-model="inputs.gender"
-          />
-          <label for="female">жен.</label>
+        <label>Пол:</label>
+        <div class="radio-buttons">
+          <label for="male">
+            <input
+              type="radio"
+              id="male"
+              value="male"
+              v-model="inputs.gender"
+            />
+            муж.
+          </label>
+          <label for="female">
+            <input
+              type="radio"
+              id="female"
+              value="female"
+              v-model="inputs.gender"
+            />
+            жен.
+          </label>
         </div>
       </div>
+      <MultiSelect />
       <div class="form-item">
-        Группа клиентов:
-        <select v-model="inputs.groupRelation" multiple>
-          <option disabled value="">выберите группы</option>
-          <option
-            v-for="(group, index) in groups"
-            :value="group.value"
-            :key="index"
-          >
-            {{ group.text }}
-          </option>
-        </select>
-      </div>
-      <div class="form-item">
-        Лечащий врач:
+        <label>Лечащий врач:</label>
         <select v-model="inputs.workingTherapist">
           <option disabled value="">выберите врача</option>
           <option
@@ -113,8 +110,10 @@ export default {
         </select>
       </div>
       <div class="form-item">
-        Не отправлять СМС:
-        <input type="checkbox" v-model="inputs.contactBySms" />
+        <label>Не отправлять СМС:</label>
+        <div class="checkbox">
+          <input type="checkbox" v-model="inputs.contactBySms" />
+        </div>
       </div>
       <slot />
     </form>
